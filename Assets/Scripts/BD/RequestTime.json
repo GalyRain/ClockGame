@@ -1,0 +1,17 @@
+{
+  "abbreviation":"-03",
+  "client_ip":"212.58.102.183",
+  "datetime":"2022-05-10T11:29:36.714674-03:00",
+  "day_of_week":2,
+  "day_of_year":130,
+  "dst":false,
+  "dst_from":null,
+  "dst_offset":0,
+  "dst_until":null,
+  "raw_offset":-10800,
+  "timezone":"America/Argentina/Salta",
+  "unixtime":1652192976,
+  "utc_datetime":"2022-05-10T14:29:36.714674+00:00",
+  "utc_offset":"-03:00",
+  "week_number":19
+}

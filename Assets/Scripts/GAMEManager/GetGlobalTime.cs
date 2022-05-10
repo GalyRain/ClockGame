@@ -5,9 +5,9 @@ namespace GAMEManager
 {
     public class GetGlobalTime
     {
-        public int Hours { get; set; } = 0;
-        public int Minutes { get; set; } = 0;
-        public int Seconds { get; set; } = 0;
+        public int Hours { get; private set; } = 0;
+        public int Minutes { get; private set; } = 0;
+        public int Seconds { get; private set; } = 0;
 
         public void GetTime() 
         {

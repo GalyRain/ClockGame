@@ -21,11 +21,11 @@ namespace GAMEManager
 			_hours = _getGlobalTime.Hours;
 			_minutes = _getGlobalTime.Minutes;
 			_seconds = _getGlobalTime.Seconds;
-			StartCoroutine(_getGlobalTime.CheckTime());
 		}
 		
 		private void FixedUpdate() 
 		{
+			StartCoroutine(_getGlobalTime.CheckTime());
 			_gameTime += Time.fixedDeltaTime;
 			if(_gameTime >= 1.0f)
 			{

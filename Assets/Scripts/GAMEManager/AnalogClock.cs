@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -22,11 +21,11 @@ namespace GAMEManager
             _hours = _getGlobalTime.Hours;
             _minutes = _getGlobalTime.Minutes;
             _seconds = _getGlobalTime.Seconds;
-            StartCoroutine(_getGlobalTime.CheckTime());
         }
 		
         private void FixedUpdate()
         {
+            StartCoroutine(_getGlobalTime.CheckTime());
             text.text = "" + _hours + ":" + _minutes;
             
             // _gameTime += 1 * Time.fixedDeltaTime;

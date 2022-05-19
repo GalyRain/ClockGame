@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace GAMEManager
+namespace GAMEPlay
 {
     public class AnalogClock : MonoBehaviour
     {
@@ -12,7 +12,7 @@ namespace GAMEManager
         private float _gameTime;
         private DateTime _time; 
         
-        [SerializeField] private TextMeshProUGUI text = null;
+        [SerializeField] private TextMeshProUGUI analogClockText = null;
         private readonly GetGlobalTime _getGlobalTime = new GetGlobalTime();
         
         private void Awake()
@@ -23,12 +23,12 @@ namespace GAMEManager
             _seconds = _getGlobalTime.Seconds;
         }
 		
-        private void FixedUpdate()
+        private void Update()
         {
             StartCoroutine(_getGlobalTime.CheckTime());
-            text.text = "" + _hours + ":" + _minutes;
+            analogClockText.text = "" + _hours + ":" + _minutes;
             
-            // _gameTime += 1 * Time.fixedDeltaTime;
+            // _gameTime += 1 * Time.deltaTime;
             //
             // if (_gameTime > 1)
             // {

@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -8,20 +7,13 @@ namespace BD
 {
     public class GetGlobalGoogleTime : MonoBehaviour
     {
-        private DateTime _time;
+        private static DateTime _time;
         private string _url = "google.com";
         private string _responseTime;
         
-        private void Start()
-        {
-            StartCoroutine(GetGlobalTime());
-            
-            // _time = СonversionTime();
-            // Debug.Log("TimeGoogle: " + _time);
-            // Debug.Log("TimeGoogle: " + _time.Hour);
-            // Debug.Log("TimeGoogle: " + _time.Minute);
-            // Debug.Log("TimeGoogle: " + _time.Second);
-        }
+        public int Hours { get; private set; } = 0;
+        public int Minutes { get; private set; } = 0;
+        public int Seconds { get; private set; } = 0;
         
         private IEnumerator GetGlobalTime()
         {
@@ -38,20 +30,18 @@ namespace BD
                 yield return DateTime.MinValue;
             }
             yield return _time.ToUniversalTime();
-            
+        }
+        
+        public void GetTime() 
+        {
+            StartCoroutine(GetGlobalTime());
             Debug.Log("TimeGoogle: " + _time);
             Debug.Log("TimeGoogle: " + _time.Hour);
             Debug.Log("TimeGoogle: " + _time.Minute);
             Debug.Log("TimeGoogle: " + _time.Second);
-        }
-
-        private DateTime СonversionTime()
-        { 
-            if (!DateTime.TryParse(_responseTime, out _time)) 
-            {
-                return DateTime.MinValue;
-            }
-            return _time.ToUniversalTime();
+            Hours = _time.Hour;
+            Minutes = _time.Minute;
+            Seconds = _time.Second;
         }
     }
 }

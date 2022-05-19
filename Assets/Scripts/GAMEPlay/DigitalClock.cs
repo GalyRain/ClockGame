@@ -1,7 +1,8 @@
-using System.Collections;
+using BD;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace GAMEManager
+namespace GAMEPlay
 {
 	public class DigitalClock : MonoBehaviour {
 		
@@ -10,10 +11,11 @@ namespace GAMEManager
 		private int _seconds = 0;
 		private float _gameTime = 0;
 	
-		[SerializeField] private GameObject pointerSeconds = null;
-		[SerializeField] private GameObject pointerMinutes= null;
-		[SerializeField] private GameObject pointerHours= null;
+		[SerializeField] private GameObject hoursArrow = null;
+		[SerializeField] private GameObject minutesArrow = null;
+		[SerializeField] private GameObject secondsArrow = null;
 		private readonly GetGlobalTime _getGlobalTime = new GetGlobalTime();
+		private GetGlobalGoogleTime _globalGoogleTime = new GetGlobalGoogleTime();
 		
 		private void Awake()
 		{
@@ -23,10 +25,15 @@ namespace GAMEManager
 			_seconds = _getGlobalTime.Seconds;
 		}
 		
-		private void FixedUpdate() 
+		private void Update() 
 		{
 			StartCoroutine(_getGlobalTime.CheckTime());
-			_gameTime += Time.fixedDeltaTime;
+			_gameTime += Time.deltaTime;
+			UpdateTime();
+		}
+
+		private void UpdateTime()
+		{
 			if(_gameTime >= 1.0f)
 			{
 				_gameTime -= 1.0f;
@@ -47,11 +54,11 @@ namespace GAMEManager
 
 			var rotationSeconds = (360.0f / 60.0f)  * _seconds;
 			var rotationMinutes = (360.0f / 60.0f)  * _minutes;
-			var rotationHours   = ((360.0f / 12.0f) * _hours) + ((360.0f / (60.0f * 12.0f)) * _minutes);
-
-			pointerSeconds.transform.localEulerAngles = new Vector3(0.0f, 0.0f, rotationSeconds);
-			pointerMinutes.transform.localEulerAngles = new Vector3(0.0f, 0.0f, rotationMinutes);
-			pointerHours.transform.localEulerAngles   = new Vector3(0.0f, 0.0f, rotationHours);
+			var rotationHours = ((360.0f / 12.0f) * _hours) + ((360.0f / (60.0f * 12.0f)) * _minutes);
+			
+			secondsArrow.transform.localEulerAngles = new Vector3(0.0f, 0.0f, -rotationSeconds);
+			minutesArrow.transform.localEulerAngles = new Vector3(0.0f, 0.0f, -rotationMinutes);
+			hoursArrow.transform.localEulerAngles = new Vector3(0.0f, 0.0f, -rotationHours);
 		}
 	}
 }
